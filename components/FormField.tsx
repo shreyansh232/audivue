@@ -1,7 +1,7 @@
 import React from "react";
 import {
   FormControl,
-  FormDescription,
+  // FormDescription,
   FormItem,
   FormLabel,
   FormMessage,
@@ -32,7 +32,12 @@ const FormField = ({
         <FormItem>
           <FormLabel className="label">{label}</FormLabel>
           <FormControl>
-            <Input className="input" placeholder={placeholder} {...field} type={type}/>
+            <Input
+              className="input"
+              placeholder={placeholder}
+              {...field}
+              type={type}
+            />
           </FormControl>
           <FormMessage />
         </FormItem>
