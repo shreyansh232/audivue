@@ -1,10 +1,9 @@
 import Nav from "@/components/Nav";
-import Link from "next/link";
 import React, { ReactNode } from "react";
 
 const Rootlayout = ({ children }: { children: ReactNode }) => {
   return (
-    <div className="root-layout">
+    <div className="relative min-h-screen">
       <Nav />
       {children}
     </div>

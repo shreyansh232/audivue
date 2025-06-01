@@ -19,7 +19,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
-      <body className={`${inter.variable} antialiased pattern`}>
+      <body className={`${inter.variable} antialiased pattern bg-black`}>
         {children}
         <Toaster />
       </body>
