@@ -17,18 +17,18 @@ export const Hero = () => {
         }}
       />
       <div className="relative z-10 flex flex-col items-center mb-64">
-        <div className="max-w-5xl bg-gradient-to-b from-gray-200 to-gray-500 bg-clip-text text-center text-4xl font-semibold leading-tight text-transparent sm:text-5xl sm:leading-tight md:text-6xl md:leading-tight">
-          <h1 className="bg-gradient-to-b from-gray-100 to-gray-600 bg-clip-text text-transparent">
+        <div className="max-w-5xl bg-gradient-to-b from-gray-200 to-gray-500 bg-clip-text text-center text-2xl font-semibold leading-tight text-transparent sm:text-5xl sm:leading-tight md:text-7xl md:leading-tight">
+          <h1 className="bg-gradient-to-b from-gray-200 via-gray-300 to-gray-600 bg-clip-text text-transparent">
             {" "}
             Crack Every Interview with
           </h1>
-          <h1 className="bg-gradient-to-b from-gray-100 to-gray-600 bg-clip-text text-transparent">
+          <h1 className="bg-gradient-to-b from-gray-200 via-gray-300 to-gray-600 bg-clip-text text-transparent">
             AI-Powered Interview Coach
           </h1>{" "}
         </div>
-        <p className="my-6 max-w-2xl text-center text-base text-gray-400 leading-relaxed md:text-lg md:leading-relaxed">
+        <p className="lg:my-5 my-3 lg:max-w-2xl text-center text-xs text-gray-400 leading-relaxed md:text-lg md:leading-relaxed">
           Simulate real interviews with an AI that asks questions, listens to
-          your answers, and gives instant voice feedback — anytime, anywhere.
+          your answers, and gives instant voice feedback
         </p>
         <motion.button
           style={{
@@ -41,7 +41,7 @@ export const Hero = () => {
           whileTap={{
             scale: 0.985,
           }}
-          className="group relative flex w-fit items-center gap-1.5 rounded-full cursor-pointer bg-gray-950/10 px-5 py-2 text-gray-50 transition-colors hover:bg-gray-950/50"
+          className="group relative flex w-fit items-center gap-1.5 rounded-full cursor-pointer bg-gray-950/10 text-xs lg:text-lg lg:px-5 lg:py-2 px-2 py-1 text-gray-50 transition-colors hover:bg-gray-950/50"
         >
           Get Started
           <FiArrowRight className="transition-transform group-hover:-rotate-45 group-active:-rotate-12" />
