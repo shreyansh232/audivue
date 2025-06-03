@@ -20,12 +20,17 @@ const Nav = () => {
           </Link>
         </div>
         <div className="flex items-center">
-          <Button className=" rounded-full tracking-widest font-semibold text-white hover:text-gray-400 hover:bg-transparent bg-transparent cursor-pointer lg:text-lg text-sm">
-            Sign up
-          </Button>
-          <Button className="font-semibold lg:text-lg text-sm rounded-full bg-accent lg:px-6 lg:py-5 px-3 py-2 cursor-pointer hover:bg-orange-400">
-            Log in
-          </Button>
+          <Link href="/sign-up">
+            {" "}
+            <Button className=" rounded-full tracking-widest font-semibold text-white hover:text-gray-400 hover:bg-transparent bg-transparent cursor-pointer lg:text-lg text-sm">
+              Sign up
+            </Button>
+          </Link>
+          <Link href="/sign-in">
+            <Button className="font-semibold lg:text-lg text-sm rounded-full bg-accent lg:px-6 lg:py-5 px-3 py-2 cursor-pointer hover:bg-orange-400">
+              Log in
+            </Button>
+          </Link>
         </div>
       </nav>
     </>

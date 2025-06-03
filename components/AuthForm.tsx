@@ -51,7 +51,7 @@ const AuthForm = ({ type }: { type: FormType }) => {
   const isSignIn = type === "sign-in";
 
   return (
-    <div className="mx-auto w-[350px] py-8 lg:max-w-3xl max-w-xl lg:w-[550px] lg:h-[550px] lg:p-10 rounded-3xl backdrop-blur-md bg-white/8">
+    <div className="mx-auto w-[350px] py-8 lg:max-w-3xl max-w-xl lg:w-[550px] lg:p-10 rounded-3xl backdrop-blur-md bg-white/8">
       <div className="flex flex-col gap-3 lg:px-10 px-7 justify-center items-center">
         <div className="flex gap-2 justify-center items-center">
           <Image src={"/audivue-logo.svg"} alt="logo" height={45} width={45} />
