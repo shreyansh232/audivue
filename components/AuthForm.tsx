@@ -33,25 +33,25 @@ const AuthForm = ({ type }: { type: FormType }) => {
   });
 
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
-    try {
-      if (type === "sign-up") {
-        toast.success("Account created successfully. Please sign in.");
-        router.push("/sign-in");
-      } else {
-        toast.success("You are signed in.");
-        router.push("/");
-      }
-    } catch (error) {
-      console.log(error);
-      toast.error(`Error while submitting the form ${error}`);
-    }
-  }
+  // function onSubmit(values: z.infer<typeof formSchema>) {
+  //   console.log(values);
+  //   try {
+  //     if (type === "sign-up") {
+  //       toast.success("Account created successfully. Please sign in.");
+  //       router.push("/sign-in");
+  //     } else {
+  //       toast.success("You are signed in.");
+  //       router.push("/");
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //     toast.error(`Error while submitting the form ${error}`);
+  //   }
+  // }
   const isSignIn = type === "sign-in";
 
   return (
-    <div className="mx-auto w-[350px] py-8 lg:max-w-3xl max-w-xl lg:w-[550px] lg:p-10 rounded-3xl backdrop-blur-md bg-white/8">
+    <div className="mx-auto w-[350px] py-8 lg:max-w-3xl max-w-xl lg:w-[550px] lg:p-10 rounded-3xl bg-white/8 shadow-lg bg-opacity-70 backdrop-filter backdrop-blur-md">
       <div className="flex flex-col gap-3 lg:px-10 px-7 justify-center items-center">
         <div className="flex gap-2 justify-center items-center">
           <Image src={"/audivue-logo.svg"} alt="logo" height={45} width={45} />
@@ -64,7 +64,7 @@ const AuthForm = ({ type }: { type: FormType }) => {
         </h3>
         <Form {...form}>
           <form
-            onSubmit={form.handleSubmit(onSubmit)}
+            // onSubmit={form.handleSubmit(onSubmit)}
             className="space-y-6 w-full mt-4"
           >
             {!isSignIn && (
@@ -89,13 +89,23 @@ const AuthForm = ({ type }: { type: FormType }) => {
               placeholder="Enter your password"
               type="password"
             />
-
-            <Button
-              className="w-full py-5 bg-accent hover:bg-orange-400 cursor-pointer"
-              type="submit"
-            >
-              {isSignIn ? "Sign In" : "Sign Up"}
-            </Button>
+            {isSignIn ? (
+              <Button
+                className="w-full py-5 bg-accent hover:bg-orange-400 cursor-pointer"
+                type="submit"
+                formAction={login}
+              >
+                Sign In
+              </Button>
+            ) : (
+              <Button
+                className="w-full py-5 bg-accent hover:bg-orange-400 cursor-pointer"
+                type="submit"
+                formAction={signup}
+              >
+                Sign Up
+              </Button>
+            )}
             {isSignIn ? (
               <Button
                 className="w-full py-5 bg-black text-white cursor-pointer hover:bg-black/30"
