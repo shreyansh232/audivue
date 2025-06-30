@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import Image from "next/image";
 import Link from "next/link";
-import { toast } from "sonner";
+// import { toast } from "sonner";
 import FormField from "./FormField";
 import { useRouter } from "next/navigation";
 import { login, signup, signInWithGoogle } from "@/actions/login";
@@ -20,7 +20,7 @@ const authFormSchema = (type: FormType) => {
 };
 
 const AuthForm = ({ type }: { type: FormType }) => {
-  const router = useRouter();
+  // const router = useRouter();
   const formSchema = authFormSchema(type);
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
