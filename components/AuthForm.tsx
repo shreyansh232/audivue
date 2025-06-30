@@ -9,7 +9,7 @@ import Link from "next/link";
 import { toast } from "sonner";
 import FormField from "./FormField";
 import { useRouter } from "next/navigation";
-import { login, signup } from "@/actions/login";
+import { login, signup, signInWithGoogle } from "@/actions/login";
 import { FcGoogle } from "react-icons/fc";
 const authFormSchema = (type: FormType) => {
   return z.object({
@@ -109,7 +109,7 @@ const AuthForm = ({ type }: { type: FormType }) => {
             {isSignIn ? (
               <Button
                 className="w-full py-5 bg-black text-white cursor-pointer hover:bg-black/30"
-                formAction={login}
+                onClick={() => signInWithGoogle()}
               >
                 Sign In with Google
                 <FcGoogle />
@@ -117,7 +117,7 @@ const AuthForm = ({ type }: { type: FormType }) => {
             ) : (
               <Button
                 className="w-full py-5 bg-black text-white cursor-pointer hover:bg-black/30"
-                formAction={signup}
+                onClick={() => signInWithGoogle()}
               >
                 Sign Up with Google
                 <FcGoogle />
