@@ -11,6 +11,7 @@ import FormField from "./FormField";
 // import { useRouter } from "next/navigation";
 import { login, signup, signInWithGoogle } from "@/actions/login";
 import { FcGoogle } from "react-icons/fc";
+
 const authFormSchema = (type: FormType) => {
   return z.object({
     name: type === "sign-up" ? z.string().min(3) : z.string().optional(),
@@ -32,22 +33,6 @@ const AuthForm = ({ type }: { type: FormType }) => {
     },
   });
 
-  // 2. Define a submit handler.
-  // function onSubmit(values: z.infer<typeof formSchema>) {
-  //   console.log(values);
-  //   try {
-  //     if (type === "sign-up") {
-  //       toast.success("Account created successfully. Please sign in.");
-  //       router.push("/sign-in");
-  //     } else {
-  //       toast.success("You are signed in.");
-  //       router.push("/");
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //     toast.error(`Error while submitting the form ${error}`);
-  //   }
-  // }
   const isSignIn = type === "sign-in";
 
   return (

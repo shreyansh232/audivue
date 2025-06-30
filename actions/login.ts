@@ -53,9 +53,10 @@ export async function signInWithGoogle() {
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: "google",
     options: {
-      redirectTo: `${origin}/auth/confirm/callback`,
+      redirectTo: `${origin}/auth/callback`,
     },
   });
+  console.log(data);
 
   if (error) {
     console.error("Error during sign-in with Google:", error);
@@ -64,5 +65,36 @@ export async function signInWithGoogle() {
 
   if (data.url) {
     redirect(data.url);
+  }
+}
+
+export async function signOut() {
+  const supabase = await createClient();
+  await supabase.auth.signOut();
+  return redirect("/");
+}
+
+export async function getUserDetails() {
+  const supabase = await createClient();
+  try {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    // Check if user is null or undefined before logging
+    if (!user) {
+      console.log("No user session found.");
+      return null;
+    }
+
+    console.log("Fetched user:", user);
+    return user;
+  } catch (e: any) {
+    if (e.name === "AuthSessionMissingError" || e.__isAuthError) {
+      console.log("No active session found for the user.");
+      return null;
+    }
+    console.error("Caught an unexpected error in getUserDetails:", e);
+    return null;
   }
 }
