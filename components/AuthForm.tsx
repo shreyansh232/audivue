@@ -8,7 +8,7 @@ import Image from "next/image";
 import Link from "next/link";
 // import { toast } from "sonner";
 import FormField from "./FormField";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 import { login, signup, signInWithGoogle } from "@/actions/login";
 import { FcGoogle } from "react-icons/fc";
 const authFormSchema = (type: FormType) => {
