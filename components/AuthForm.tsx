@@ -9,7 +9,7 @@ import Link from "next/link";
 // import { toast } from "sonner";
 import FormField from "./FormField";
 // import { useRouter } from "next/navigation";
-import { login, signup, signInWithGoogle } from "@/actions/login";
+import { signUp } from "@/actions/auth-actions";
 import { FcGoogle } from "react-icons/fc";
 
 const authFormSchema = (type: FormType) => {
@@ -18,6 +18,17 @@ const authFormSchema = (type: FormType) => {
     email: z.string().email(),
     password: z.string().min(6),
   });
+};
+const signUpSchema = authFormSchema("sign-up");
+type SignUpInput = z.infer<typeof signUpSchema>;
+
+const onSubmit = async (data: SignUpInput) => {
+  const formData = new FormData();
+  formData.append("name", data.name || "");
+  formData.append("email", data.email);
+  formData.append("password", data.password);
+
+  await signUp(formData);
 };
 
 const AuthForm = ({ type }: { type: FormType }) => {
@@ -49,7 +60,7 @@ const AuthForm = ({ type }: { type: FormType }) => {
         </h3>
         <Form {...form}>
           <form
-            // onSubmit={form.handleSubmit(onSubmit)}
+            onSubmit={form.handleSubmit(onSubmit)}
             className="space-y-6 w-full mt-4"
           >
             {!isSignIn && (
@@ -78,7 +89,6 @@ const AuthForm = ({ type }: { type: FormType }) => {
               <Button
                 className="w-full py-5 bg-accent hover:bg-orange-400 cursor-pointer"
                 type="submit"
-                formAction={login}
               >
                 Sign In
               </Button>
@@ -86,24 +96,17 @@ const AuthForm = ({ type }: { type: FormType }) => {
               <Button
                 className="w-full py-5 bg-accent hover:bg-orange-400 cursor-pointer"
                 type="submit"
-                formAction={signup}
               >
                 Sign Up
               </Button>
             )}
             {isSignIn ? (
-              <Button
-                className="w-full py-5 bg-black text-white cursor-pointer hover:bg-black/30"
-                onClick={() => signInWithGoogle()}
-              >
+              <Button className="w-full py-5 bg-black text-white cursor-pointer hover:bg-black/30">
                 Sign In with Google
                 <FcGoogle />
               </Button>
             ) : (
-              <Button
-                className="w-full py-5 bg-black text-white cursor-pointer hover:bg-black/30"
-                onClick={() => signInWithGoogle()}
-              >
+              <Button className="w-full py-5 bg-black text-white cursor-pointer hover:bg-black/30">
                 Sign Up with Google
                 <FcGoogle />
               </Button>

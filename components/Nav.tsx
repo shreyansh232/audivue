@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { Button } from "./ui/button";
 import Image from "next/image";
-import { signOut } from "@/actions/login";
 import { LogOut } from "lucide-react";
 
 const Nav = ({ user }: { user: any }) => {
