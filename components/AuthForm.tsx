@@ -19,17 +19,6 @@ const authFormSchema = (type: FormType) => {
     password: z.string().min(6),
   });
 };
-const signUpSchema = authFormSchema("sign-up");
-type SignUpInput = z.infer<typeof signUpSchema>;
-
-const onSubmit = async (data: SignUpInput) => {
-  const formData = new FormData();
-  formData.append("name", data.name || "");
-  formData.append("email", data.email);
-  formData.append("password", data.password);
-
-  await signUp(formData);
-};
 
 const AuthForm = ({ type }: { type: FormType }) => {
   // const router = useRouter();
@@ -38,11 +27,19 @@ const AuthForm = ({ type }: { type: FormType }) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: " ",
-      email: " ",
-      password: " ",
+      name: "",
+      email: "",
+      password: "",
     },
   });
+  const onSubmit = async (data: z.infer<typeof formSchema>) => {
+    const formData = new FormData();
+    formData.append("name", data.name || "");
+    formData.append("email", data.email);
+    formData.append("password", data.password);
+
+    await signUp(formData);
+  };
 
   const isSignIn = type === "sign-in";
 

@@ -3,7 +3,15 @@ import { Button } from "./ui/button";
 import Image from "next/image";
 import { LogOut } from "lucide-react";
 
-const Nav = ({ user }: { user: any }) => {
+interface userSchema {
+  email: string;
+  user_metadata: {
+    avatar_url: string;
+    full_name: string;
+  };
+}
+
+const Nav = ({ user }: { user: userSchema }) => {
   return (
     <>
       <nav className="py-10 lg:mx-30 mx-6 flex items-center justify-between">
@@ -34,7 +42,7 @@ const Nav = ({ user }: { user: any }) => {
             <span className="text-white font-semibold">
               {user.user_metadata?.full_name || user.email}
             </span>
-            <form action={signOut}>
+            <form>
               <Button
                 className="font-semibold lg:text-base text-sm rounded-full bg-accent lg:px-6 lg:py-5 px-3 py-2 cursor-pointer hover:bg-orange-400"
                 type="submit"
