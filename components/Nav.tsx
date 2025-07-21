@@ -2,16 +2,9 @@ import Link from "next/link";
 import { Button } from "./ui/button";
 import Image from "next/image";
 import { LogOut } from "lucide-react";
+import { signOut } from "@/actions/auth-actions";
 
-interface userSchema {
-  email: string;
-  user_metadata: {
-    avatar_url: string;
-    full_name: string;
-  };
-}
-
-const Nav = ({ user }: { user: userSchema }) => {
+const Nav = ({ session }: { session: any }) => {
   return (
     <>
       <nav className="py-10 lg:mx-30 mx-6 flex items-center justify-between">
@@ -28,11 +21,11 @@ const Nav = ({ user }: { user: userSchema }) => {
             </h1>
           </Link>
         </div>
-        {user ? (
+        {session ? (
           <div className="flex items-center gap-4">
-            {user.user_metadata?.avatar_url && (
+            {session?.user?.image && (
               <Image
-                src={user.user_metadata.avatar_url}
+                src={session?.user?.image}
                 alt="User Avatar"
                 width={40}
                 height={40}
@@ -40,12 +33,13 @@ const Nav = ({ user }: { user: userSchema }) => {
               />
             )}
             <span className="text-white font-semibold">
-              {user.user_metadata?.full_name || user.email}
+              {session?.user?.name || session?.user?.email}
             </span>
             <form>
               <Button
                 className="font-semibold lg:text-base text-sm rounded-full bg-accent lg:px-6 lg:py-5 px-3 py-2 cursor-pointer hover:bg-orange-400"
                 type="submit"
+                onClick={signOut}
               >
                 Sign Out
                 <LogOut />

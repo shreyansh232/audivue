@@ -6,10 +6,10 @@ import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import Image from "next/image";
 import Link from "next/link";
-// import { toast } from "sonner";
+import { toast } from "sonner";
 import FormField from "./FormField";
-// import { useRouter } from "next/navigation";
-import { signUp } from "@/actions/auth-actions";
+import { useRouter } from "next/navigation";
+import { signIn, signUp } from "@/actions/auth-actions";
 import { FcGoogle } from "react-icons/fc";
 
 const authFormSchema = (type: FormType) => {
@@ -21,7 +21,7 @@ const authFormSchema = (type: FormType) => {
 };
 
 const AuthForm = ({ type }: { type: FormType }) => {
-  // const router = useRouter();
+  const router = useRouter();
   const formSchema = authFormSchema(type);
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
@@ -34,11 +34,24 @@ const AuthForm = ({ type }: { type: FormType }) => {
   });
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
     const formData = new FormData();
-    formData.append("name", data.name || "");
-    formData.append("email", data.email);
-    formData.append("password", data.password);
-
-    await signUp(formData);
+    try {
+      if (type === "sign-up") {
+        formData.append("name", data.name || "");
+        formData.append("email", data.email);
+        formData.append("password", data.password);
+        await signUp(formData);
+        toast.success("User signed up");
+        router.push("/sign-in");
+      } else {
+        formData.append("email", data.email);
+        formData.append("password", data.password);
+        await signIn(formData);
+        toast.success("User signed in");
+        router.push("/");
+      }
+    } catch (error) {
+      toast.error("Error occured. Please try again later");
+    }
   };
 
   const isSignIn = type === "sign-in";
