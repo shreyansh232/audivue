@@ -17,6 +17,11 @@ export const auth = betterAuth({
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
     },
+    rateLimit: {
+      enabled: true,
+      window: 10, // time window in seconds
+      max: 100, // max requests in the window
+    },
   },
   plugins: [nextCookies()],
   baseURL: process.env.NEXT_PUBLIC_BASE_URL!,

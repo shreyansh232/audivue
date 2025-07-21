@@ -3,8 +3,9 @@ import { Button } from "./ui/button";
 import Image from "next/image";
 import { LogOut } from "lucide-react";
 import { signOut } from "@/actions/auth-actions";
+import { BetterAuthSession } from "@/types";
 
-const Nav = ({ session }: { session: any }) => {
+const Nav = ({ session }: { session: BetterAuthSession }) => {
   return (
     <>
       <nav className="py-10 lg:mx-30 mx-6 flex items-center justify-between">

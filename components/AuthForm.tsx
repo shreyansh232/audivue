@@ -12,6 +12,7 @@ import { useRouter } from "next/navigation";
 import { signIn, signUp } from "@/actions/auth-actions";
 import { FcGoogle } from "react-icons/fc";
 import { authClient } from "@/lib/auth-client";
+import { FormType } from "@/types";
 
 const authFormSchema = (type: FormType) => {
   return z.object({
@@ -51,6 +52,7 @@ const AuthForm = ({ type }: { type: FormType }) => {
         router.push("/");
       }
     } catch (error) {
+      console.log("Error", error);
       toast.error("Error occured. Please try again later");
     }
   };

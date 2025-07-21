@@ -97,3 +97,24 @@ interface InterviewFormProps {
 interface TechIconProps {
   techStack: string[];
 }
+export interface BetterAuthSession {
+  session: {
+    id: string;
+    createdAt: string;
+    expiresAt: string;
+    ipAddress: string;
+    token: string;
+    updatedAt: string;
+    userAgent: string;
+    userId: string;
+  };
+  user: {
+    id: string;
+    createdAt: string;
+    updatedAt: string;
+    email: string;
+    emailVerified: boolean;
+    image: string | null;
+    name: string;
+  };
+}
