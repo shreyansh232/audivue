@@ -1,6 +1,7 @@
 "use client";
 import { FiArrowRight } from "react-icons/fi";
 import { useMotionTemplate, motion } from "framer-motion";
+import Link from "next/link";
 
 export const Hero = () => {
   const color = "#FF6900";
@@ -30,22 +31,24 @@ export const Hero = () => {
           Simulate real interviews with an AI that asks questions, listens to
           your answers, and gives instant voice feedback
         </p>
-        <motion.button
-          style={{
-            border,
-            boxShadow,
-          }}
-          whileHover={{
-            scale: 1.015,
-          }}
-          whileTap={{
-            scale: 0.985,
-          }}
-          className="group relative flex w-fit items-center gap-1.5 rounded-full cursor-pointer bg-gray-950/10 text-xs lg:text-lg lg:px-5 lg:py-2 px-2 py-1 text-gray-50 transition-colors hover:bg-gray-950/50"
-        >
-          Get Started
-          <FiArrowRight className="transition-transform group-hover:-rotate-45 group-active:-rotate-12" />
-        </motion.button>
+        <Link href={"/onboarding"}>
+          <motion.button
+            style={{
+              border,
+              boxShadow,
+            }}
+            whileHover={{
+              scale: 1.015,
+            }}
+            whileTap={{
+              scale: 0.985,
+            }}
+            className="group relative flex w-fit items-center gap-1.5 rounded-full cursor-pointer bg-gray-950/10 text-xs lg:text-lg lg:px-5 lg:py-2 px-2 py-1 text-gray-50 transition-colors hover:bg-gray-950/50"
+          >
+            Get Started
+            <FiArrowRight className="transition-transform group-hover:-rotate-45 group-active:-rotate-12" />
+          </motion.button>
+        </Link>
       </div>
     </motion.section>
   );

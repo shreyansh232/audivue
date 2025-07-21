@@ -97,6 +97,38 @@ export const mappings = {
   "aws amplify": "amplify",
 };
 
+export const techRoles = [
+  { label: "Frontend Developer", value: "frontend-developer" },
+  { label: "Backend Developer", value: "backend-developer" },
+  { label: "Fullstack Developer", value: "fullstack-developer" },
+  { label: "Software Engineer", value: "software-engineer" },
+  { label: "Data Engineer", value: "data-engineer" },
+  { label: "ML Engineer", value: "ml-engineer" },
+  { label: "AI Engineer", value: "ai-engineer" },
+  { label: "Data Scientist", value: "data-scientist" },
+  { label: "DevOps Engineer", value: "devops-engineer" },
+  { label: "QA Engineer", value: "qa-engineer" },
+  { label: "Mobile Developer", value: "mobile-developer" },
+  { label: "Game Developer", value: "game-developer" },
+  { label: "Cloud Engineer", value: "cloud-engineer" },
+  { label: "Security Engineer", value: "security-engineer" },
+  { label: "UI/UX Designer", value: "ui-ux-designer" },
+  { label: "Product Manager", value: "product-manager" },
+];
+
+export const experience = [
+  { label: "0 - 2 years", value: "0-2" },
+  { label: "2 - 5 years", value: "2-5" },
+  { label: "5 - 10 years", value: "5-10" },
+  { label: "10+ years", value: "10+" },
+];
+
+export const mockGoals = [
+  { label: "Prepare for a specific company", value: "specific_company" },
+  { label: "Build confidence", value: "confidence" },
+  { label: "Get feedback", value: "feedback" },
+];
+
 export const interviewer: CreateAssistantDTO = {
   name: "Interviewer",
   firstMessage:
