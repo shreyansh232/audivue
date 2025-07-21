@@ -11,6 +11,18 @@ const urbanist = Urbanist({
 export const metadata: Metadata = {
   title: "Audivue AI",
   description: "Real Time AI Voice Agent Interview Platform",
+  openGraph: {
+    title: "Audivue AI",
+    description: "Real Time AI Voice Agent Interview Platform",
+    images: [
+      {
+        url: "/og.png",
+        width: 1200,
+        height: 630,
+        alt: "Site preview",
+      },
+    ],
+  },
 };
 
 export default function RootLayout({
