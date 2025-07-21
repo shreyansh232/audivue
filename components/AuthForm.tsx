@@ -11,6 +11,7 @@ import FormField from "./FormField";
 import { useRouter } from "next/navigation";
 import { signIn, signUp } from "@/actions/auth-actions";
 import { FcGoogle } from "react-icons/fc";
+import { authClient } from "@/lib/auth-client";
 
 const authFormSchema = (type: FormType) => {
   return z.object({
@@ -52,6 +53,13 @@ const AuthForm = ({ type }: { type: FormType }) => {
     } catch (error) {
       toast.error("Error occured. Please try again later");
     }
+  };
+
+  const signInWithGoogle = async () => {
+    await authClient.signIn.social({
+      provider: "google",
+      callbackURL: "/",
+    });
   };
 
   const isSignIn = type === "sign-in";
@@ -111,12 +119,18 @@ const AuthForm = ({ type }: { type: FormType }) => {
               </Button>
             )}
             {isSignIn ? (
-              <Button className="w-full py-5 bg-black text-white cursor-pointer hover:bg-black/30">
+              <Button
+                className="w-full py-5 bg-black text-white cursor-pointer hover:bg-black/30"
+                onClick={signInWithGoogle}
+              >
                 Sign In with Google
                 <FcGoogle />
               </Button>
             ) : (
-              <Button className="w-full py-5 bg-black text-white cursor-pointer hover:bg-black/30">
+              <Button
+                className="w-full py-5 bg-black text-white cursor-pointer hover:bg-black/30"
+                onClick={signInWithGoogle}
+              >
                 Sign Up with Google
                 <FcGoogle />
               </Button>
