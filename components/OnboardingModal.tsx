@@ -23,7 +23,7 @@ function OnboardingModal({ isOpen, onClose }: ModalProps) {
         <DialogHeader>
           <DialogTitle>Edit profile</DialogTitle>
           <DialogDescription>
-            Make changes to your profile here. Click save when you're done.
+            Make changes to your profile here.
           </DialogDescription>
         </DialogHeader>
         <form className="grid gap-4">

@@ -2,7 +2,7 @@
 import OnboardingModal from "@/components/OnboardingModal";
 import { useState } from "react";
 
-const page = () => {
+const Page = () => {
   const [isOpen, setIsOpen] = useState(true);
   return (
     <>
@@ -11,4 +11,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
