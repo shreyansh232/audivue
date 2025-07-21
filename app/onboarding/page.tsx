@@ -217,7 +217,7 @@ function Page() {
             <FormField
               control={form.control}
               name="resume"
-              render={({ field }) => (
+              render={() => (
                 <FormItem>
                   <FormLabel className="text-lg sm:text-xl">
                     Upload Resume
