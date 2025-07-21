@@ -1,11 +1,13 @@
+"use client";
 import Link from "next/link";
 import { Button } from "./ui/button";
 import Image from "next/image";
 import { LogOut } from "lucide-react";
 import { signOut } from "@/actions/auth-actions";
-import { BetterAuthSession } from "@/types";
+import { authClient } from "@/lib/auth-client";
 
-const Nav = ({ session }: { session: BetterAuthSession }) => {
+const Nav = () => {
+  const { data: session } = authClient.useSession();
   return (
     <>
       <nav className="py-10 lg:mx-30 mx-6 flex items-center justify-between">

@@ -3,7 +3,7 @@
 import { auth } from "@/lib/auth";
 import { authClient } from "@/lib/auth-client";
 import { BetterAuthError, success } from "better-auth";
-import { headers } from "next/headers";
+import { cookies, headers } from "next/headers";
 import { toast } from "sonner";
 
 export const signUp = async (formData: FormData) => {
@@ -59,7 +59,9 @@ export const signOut = async () => {
   }
 };
 
-export const getSession = async () =>
-  await auth.api.getSession({
-    headers: await headers(),
+export const getSession = async () => {
+  const resolvedHeaders = await headers(); // ✅ resolves Promise
+  return auth.api.getSession({
+    headers: resolvedHeaders,
   });
+};
