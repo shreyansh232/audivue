@@ -3,6 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import React, { useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -14,7 +15,6 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
@@ -24,8 +24,9 @@ import {
 } from "@/components/ui/select";
 import { experience, mockGoals, techRoles } from "@/constants";
 import { Textarea } from "@/components/ui/textarea";
-import { useEffect, useState } from "react";
-import { cn } from "@/lib/utils"; // Ensure you have this utility for className merging
+import { useEffect } from "react";
+import { cn } from "@/lib/utils";
+import { FileUpload } from "@/components/ui/file-upload";
 
 const formSchema = z.object({
   jobrole: z.string().min(2, { message: "Job role is required." }),
@@ -69,20 +70,26 @@ function Page() {
     console.log("Form submitted:", values);
   }
 
+  const handleFileUpload = (files: File[]) => {
+    if (files.length > 0) {
+      form.setValue("resume", files[0]);
+    }
+  };
+
   return (
-    <div className="flex items-center justify-center min-h-screen px-4">
-      <div className="max-w-3xl bg-white/8 shadow-lg lg:w-[550px] bg-opacity-70 backdrop-filter backdrop-blur-md px-6 py-8 rounded-3xl w-[350px]">
+    <div className="flex items-center justify-center p-4 sm:p-6 mb-20">
+      <div className="w-full max-w-md sm:max-w-lg lg:max-w-xl xl:max-w-2xl bg-white/8 shadow-lg bg-opacity-70 backdrop-filter backdrop-blur-md px-6 sm:px-10 md:px-16 lg:px-20 py-8 sm:py-12 lg:py-10 rounded-2xl sm:rounded-3xl">
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-6 text-base"
+            className="space-y-4 sm:space-y-6 text-sm sm:text-base"
           >
             <FormField
               control={form.control}
               name="jobrole"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-lg">Job Role</FormLabel>
+                  <FormLabel className="text-lg sm:text-xl">Job Role</FormLabel>
                   <FormControl>
                     <Select
                       onValueChange={field.onChange}
@@ -90,7 +97,7 @@ function Page() {
                     >
                       <SelectTrigger
                         className={cn(
-                          "w-full",
+                          "w-full p-3 sm:p-4 lg:p-6 h-12 sm:h-14",
                           getBorderColor(!!form.formState.errors.jobrole),
                         )}
                       >
@@ -115,7 +122,9 @@ function Page() {
               name="experience"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-lg">Experience</FormLabel>
+                  <FormLabel className="text-lg sm:text-xl">
+                    Experience
+                  </FormLabel>
                   <FormControl>
                     <Select
                       onValueChange={field.onChange}
@@ -123,7 +132,7 @@ function Page() {
                     >
                       <SelectTrigger
                         className={cn(
-                          "w-full",
+                          "w-full p-3 sm:p-4 lg:p-6 h-12 sm:h-14",
                           getBorderColor(!!form.formState.errors.experience),
                         )}
                       >
@@ -148,7 +157,9 @@ function Page() {
               name="goal"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-lg">Mock Interview Goal</FormLabel>
+                  <FormLabel className="text-lg sm:text-xl">
+                    Mock Interview Goal
+                  </FormLabel>
                   <FormControl>
                     <Select
                       onValueChange={field.onChange}
@@ -156,7 +167,7 @@ function Page() {
                     >
                       <SelectTrigger
                         className={cn(
-                          "w-full",
+                          "w-full p-3 sm:p-4 lg:p-6 h-12 sm:h-14",
                           getBorderColor(!!form.formState.errors.goal),
                         )}
                       >
@@ -182,13 +193,18 @@ function Page() {
                 name="jobdescription"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-lg">Job Description</FormLabel>
+                    <FormLabel className="text-lg sm:text-xl">
+                      Job Description
+                    </FormLabel>
                     <FormControl>
                       <Textarea
                         {...field}
                         placeholder="Enter the job description here..."
-                        className={getBorderColor(
-                          !!form.formState.errors.jobdescription,
+                        className={cn(
+                          "min-h-[100px] sm:min-h-[120px] p-3 sm:p-4 resize-y",
+                          getBorderColor(
+                            !!form.formState.errors.jobdescription,
+                          ),
                         )}
                       />
                     </FormControl>
@@ -203,16 +219,22 @@ function Page() {
               name="resume"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-lg">Upload Resume</FormLabel>
+                  <FormLabel className="text-lg sm:text-xl">
+                    Upload Resume
+                  </FormLabel>
                   <FormControl>
-                    <Input
-                      type="file"
-                      accept=".pdf,.doc,.docx"
-                      onChange={(e) => field.onChange(e.target.files?.[0])}
-                      className={getBorderColor(!!form.formState.errors.resume)}
-                    />
+                    <div
+                      className={cn(
+                        "w-full",
+                        getBorderColor(!!form.formState.errors.resume),
+                      )}
+                    >
+                      <FileUpload onChange={handleFileUpload} />
+                    </div>
                   </FormControl>
-                  <FormDescription>PDF or DOC format preferred</FormDescription>
+                  <FormDescription className="text-xs sm:text-sm mt-2">
+                    PDF or DOC format preferred
+                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -220,9 +242,9 @@ function Page() {
 
             <Button
               type="submit"
-              className="bg-accent cursor-pointer hover:bg-orange-400 w-full"
+              className="bg-accent cursor-pointer hover:bg-orange-400 w-full text-base sm:text-lg h-12 sm:h-14 mt-6 sm:mt-8 transition-colors duration-200"
             >
-              Submit
+              Start Mock Interview
             </Button>
           </form>
         </Form>
