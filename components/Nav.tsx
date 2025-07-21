@@ -40,7 +40,7 @@ const Nav = () => {
             </span>
             <form>
               <Button
-                className="font-semibold lg:text-base text-sm rounded-full bg-accent lg:px-6 lg:py-5 px-3 py-2 cursor-pointer hover:bg-orange-400"
+                className="font-semibold lg:text-base text-sm rounded-full bg-accent lg:px-10 lg:py-5 px-3 py-2 cursor-pointer hover:bg-orange-400"
                 type="submit"
                 onClick={signOut}
               >
