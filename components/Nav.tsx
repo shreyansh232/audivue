@@ -5,9 +5,18 @@ import Image from "next/image";
 import { LogOut } from "lucide-react";
 import { signOut } from "@/actions/auth-actions";
 import { authClient } from "@/lib/auth-client";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const Nav = () => {
-  const { data: session } = authClient.useSession();
+  const { data: session, refetch } = authClient.useSession();
   return (
     <>
       <nav className="py-10 lg:mx-30 mx-6 flex items-center justify-between">
@@ -26,28 +35,39 @@ const Nav = () => {
         </div>
         {session ? (
           <div className="flex items-center gap-4">
-            {session?.user?.image && (
-              <Image
-                src={session?.user?.image}
-                alt="User Avatar"
-                width={40}
-                height={40}
-                className="rounded-full"
-              />
-            )}
-            <span className="text-white font-semibold">
-              {session?.user?.name || session?.user?.email}
-            </span>
-            <form>
-              <Button
-                className="font-semibold lg:text-base text-sm rounded-full bg-accent lg:px-10 lg:py-5 px-3 py-2 cursor-pointer hover:bg-orange-400"
-                type="submit"
-                onClick={signOut}
+            <DropdownMenu>
+              <DropdownMenuTrigger
+                asChild
+                className="outline-none cursor-pointer"
               >
-                Sign Out
-                <LogOut />
-              </Button>
-            </form>
+                <div>
+                  {" "}
+                  <Avatar className="h-10 w-10">
+                    <AvatarImage
+                      alt="User Avatar"
+                      src={session?.user?.image as string}
+                    />
+                    <AvatarFallback> {session?.user?.name?.[0]}</AvatarFallback>
+                  </Avatar>
+                </div>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem className="cursor-pointer">
+                  Profile
+                </DropdownMenuItem>
+                <DropdownMenuItem
+                  onSelect={async () => {
+                    await signOut();
+                    refetch();
+                  }}
+                  className="cursor-pointer"
+                >
+                  Sign Out <LogOut />
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         ) : (
           <div className="flex items-center">
